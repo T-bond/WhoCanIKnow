@@ -2,8 +2,10 @@ package hu.t_bond.whocaniknow
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import dagger.hilt.android.AndroidEntryPoint
 import hu.t_bond.whocaniknow.ui.main.MainFragment
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {

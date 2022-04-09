@@ -6,8 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import dagger.hilt.android.AndroidEntryPoint
 import hu.t_bond.whocaniknow.R
 
+@AndroidEntryPoint
 class MainFragment : Fragment() {
 
     companion object {
