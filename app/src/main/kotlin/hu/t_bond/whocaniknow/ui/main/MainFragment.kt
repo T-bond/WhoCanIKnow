@@ -10,10 +10,6 @@ import hu.t_bond.whocaniknow.databinding.MainFragmentBinding
 
 class MainFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = MainFragment()
-    }
-
     private lateinit var binding: MainFragmentBinding
     private val viewModel: MainViewModel by viewModels()
 
