@@ -16,9 +16,13 @@ class MainViewModel @Inject constructor(
     private val _contacts: LiveData<Map<Int, Contact>> =
         MutableLiveData(contactService.getContacts())
 
-    private val _filter: MutableLiveData<String> = MutableLiveData("")
+    private val _hasDataAvailable: MutableLiveData<Boolean> = MutableLiveData(false)
+
+    val filter: MutableLiveData<String> = MutableLiveData("")
 
     fun getContacts(): LiveData<Map<Int, Contact>> = _contacts
+
+    fun getDataAvailable(): LiveData<Boolean> = _hasDataAvailable
 
     fun refreshContactList() {
         TODO("Not yet implemented.")
