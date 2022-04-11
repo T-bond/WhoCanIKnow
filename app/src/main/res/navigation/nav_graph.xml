@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/mainFragment">
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="hu.t_bond.whocaniknow.ui.main.MainFragment"
+        android:label="main_fragment"
+        tools:layout="@layout/main_fragment">
+        <action
+            android:id="@+id/openAbout"
+            app:destination="@id/aboutFragment"
+            app:enterAnim="@anim/slide_right_to_in"
+            app:exitAnim="@anim/slide_in_to_left"
+            app:popEnterAnim="@anim/slide_left_to_in"
+            app:popExitAnim="@anim/slide_in_to_right" />
+        <action
+            android:id="@+id/openDetails"
+            app:destination="@id/detailFragment"
+            app:enterAnim="@anim/slide_right_to_in"
+            app:exitAnim="@anim/slide_in_to_left"
+            app:popEnterAnim="@anim/slide_left_to_in"
+            app:popExitAnim="@anim/slide_in_to_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="hu.t_bond.whocaniknow.ui.about.AboutFragment"
+        android:label="about_fragment"
+        tools:layout="@layout/about_fragment" />
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="hu.t_bond.whocaniknow.ui.detail.DetailFragment"
+        android:label="detail_fragment"
+        tools:layout="@layout/detail_fragment">
+        <argument
+            android:name="contactId"
+            app:argType="integer" />
+    </fragment>
+</navigation>
