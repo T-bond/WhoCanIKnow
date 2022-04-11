@@ -10,10 +10,6 @@ import hu.t_bond.whocaniknow.databinding.DetailFragmentBinding
 
 class DetailFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = DetailFragment()
-    }
-
     private lateinit var binding: DetailFragmentBinding
     private val viewModel: DetailViewModel by viewModels()
 
