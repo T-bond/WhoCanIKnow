@@ -6,8 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import dagger.hilt.android.AndroidEntryPoint
 import hu.t_bond.whocaniknow.databinding.MainFragmentBinding
 
+@AndroidEntryPoint
 class MainFragment : Fragment() {
 
     private lateinit var binding: MainFragmentBinding

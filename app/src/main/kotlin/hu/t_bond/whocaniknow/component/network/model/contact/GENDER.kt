@@ -1,6 +1,10 @@
 package hu.t_bond.whocaniknow.component.network.model.contact
 
-enum class GENDER(val gender: String) {
+import hu.t_bond.whocaniknow.component.network.converter.Parameterizable
+
+enum class GENDER(private val gender: String) : Parameterizable {
     MALE("male"),
-    FEMALE("female"),
+    FEMALE("female");
+
+    override fun toParameter(): String = gender
 }
