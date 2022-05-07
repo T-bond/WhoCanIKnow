@@ -39,6 +39,14 @@ paths:
           description: The number of users to generate
           allowEmptyValue: true
         - schema:
+            type: integer
+            minimum: 1
+            default: 1
+          in: query
+          name: page
+          description: The requested page number
+          allowEmptyValue: true
+        - schema:
             type: string
             enum:
               - male
@@ -46,7 +54,7 @@ paths:
             example: female
           in: query
           name: gender
-          description: Generated users' gender. Empty or invalid values will  generate from both sex
+          description: Generated users' gender. Empty or invalid values will generate from both sex
           allowEmptyValue: true
         - schema:
             anyOf:
@@ -67,12 +75,14 @@ paths:
           name: password
           allowEmptyValue: true
           explode: false
-          description: Generated passwords' parameters
+          description: Generated passwords' parameters. Empty value will generate commonly used passwords
         - schema:
             type: string
+            default: ''
           in: query
           name: seed
-          description: The seed used for the random generator
+          allowEmptyValue: true
+          description: The seed used for the random generator. Leave empty for random seed
         - schema:
             type: string
             default: json
@@ -112,7 +122,7 @@ paths:
             uniqueItems: true
           in: query
           name: nat
-          description: Nationality of generated user
+          description: Nationality of generated user. Leave empty for random nationality
           allowEmptyValue: true
           explode: false
         - schema:
@@ -121,7 +131,7 @@ paths:
               $ref: '#/components/schemas/Fields'
           in: query
           name: inc
-          description: Parameters to include
+          description: Parameters to include. Leave empty to include everyting
           allowEmptyValue: true
           explode: false
         - schema:
@@ -130,7 +140,7 @@ paths:
               $ref: '#/components/schemas/Fields'
           in: query
           name: exc
-          description: Parameters to exclude
+          description: Parameters to exclude. Leave empty to not exclude anything
           allowEmptyValue: true
           explode: false
       description: Get a list of users
