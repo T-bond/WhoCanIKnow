@@ -1,0 +1,340 @@
+openapi: 3.1.0
+info:
+  title: WhoCanIKnow
+  version: '1.0'
+  summary: API documentation for the server part of the Who Can I Know? application.
+  description: 'The API documentation for the Who Can I Know? application, based on the Random User API.'
+  license:
+    url: 'https://randomuser.me/copyright'
+    name: Copyright notice
+  contact:
+    name: Tamás Nagy
+    url: 'https://t-bond.hu'
+    email: contact@t-bond.hu
+servers:
+  - description: Public API Latest
+    url: 'https://randomuser.me/api'
+  - url: 'https://randomuser.me/api/1.3'
+    description: Public API v1.3
+  - url: 'https://randomuser.me/api/1.2'
+    description: Public API v1.2
+  - url: 'https://randomuser.me/api/1.1'
+    description: Public API v1.1
+  - description: Public API v1.0
+    url: 'https://randomuser.me/api/1.0'
+paths:
+  /:
+    get:
+      summary: Your GET endpoint
+      operationId: get-users
+      parameters:
+        - schema:
+            type: integer
+            minimum: 1
+            maximum: 5000
+            example: 5000
+            default: 1
+          in: query
+          name: results
+          description: The number of users to generate
+          allowEmptyValue: true
+        - schema:
+            type: string
+            enum:
+              - male
+              - female
+            example: female
+          in: query
+          name: gender
+          description: Generated users' gender. Empty or invalid values will  generate from both sex
+          allowEmptyValue: true
+        - schema:
+            anyOf:
+              - type: array
+                uniqueItems: true
+                items:
+                  $ref: '#/components/schemas/Charsets'
+              - type: array
+                uniqueItems: true
+                items:
+                  allOf:
+                    - $ref: '#/components/schemas/Charsets'
+                    - type: string
+                      default: 8-64
+                      pattern: \d(-\d)?
+                      description: 'Length of generated password in the ,,min length-max length" or ,,length" format.'
+          in: query
+          name: password
+          allowEmptyValue: true
+          explode: false
+          description: Generated passwords' parameters
+        - schema:
+            type: string
+          in: query
+          name: seed
+          description: The seed used for the random generator
+        - schema:
+            type: string
+            default: json
+            enum:
+              - json
+              - prettyjson
+              - pretty
+              - csv
+              - yaml
+              - xml
+          in: query
+          name: format
+          description: The response format
+          allowEmptyValue: true
+        - schema:
+            type: array
+            items:
+              type: string
+              enum:
+                - AU
+                - BR
+                - CA
+                - CH
+                - DE
+                - DK
+                - ES
+                - FI
+                - FR
+                - GB
+                - IE
+                - IR
+                - 'NO'
+                - NL
+                - NZ
+                - TR
+                - US
+            uniqueItems: true
+          in: query
+          name: nat
+          description: Nationality of generated user
+          allowEmptyValue: true
+          explode: false
+        - schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/Fields'
+          in: query
+          name: inc
+          description: Parameters to include
+          allowEmptyValue: true
+          explode: false
+        - schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/Fields'
+          in: query
+          name: exc
+          description: Parameters to exclude
+          allowEmptyValue: true
+          explode: false
+      description: Get a list of users
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        gender:
+                          type: string
+                        name:
+                          type: object
+                          properties:
+                            title:
+                              type: string
+                            first:
+                              type: string
+                            last:
+                              type: string
+                        location:
+                          type: object
+                          properties:
+                            street:
+                              type: string
+                            city:
+                              type: string
+                            state:
+                              type: string
+                            postcode:
+                              type: string
+                            coordinates:
+                              type: object
+                              properties:
+                                latitude:
+                                  type: string
+                                longitude:
+                                  type: string
+                            timezone:
+                              type: object
+                              properties:
+                                offset:
+                                  type: string
+                                description:
+                                  type: string
+                        email:
+                          type: string
+                        login:
+                          type: object
+                          properties:
+                            uuid:
+                              type: string
+                            username:
+                              type: string
+                            password:
+                              type: string
+                            salt:
+                              type: string
+                            md5:
+                              type: string
+                            sha1:
+                              type: string
+                            sha256:
+                              type: string
+                        dob:
+                          type: object
+                          properties:
+                            date:
+                              type: string
+                            age:
+                              type: integer
+                        registered:
+                          type: object
+                          properties:
+                            date:
+                              type: string
+                            age:
+                              type: integer
+                        phone:
+                          type: string
+                        cell:
+                          type: string
+                        id:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                            value:
+                              type: string
+                        picture:
+                          type: object
+                          properties:
+                            large:
+                              type: string
+                            medium:
+                              type: string
+                            thumbnail:
+                              type: string
+                        nat:
+                          type: string
+                  info:
+                    type: object
+                    properties:
+                      seed:
+                        type: string
+                      results:
+                        type: integer
+                      page:
+                        type: integer
+                      version:
+                        type: string
+              examples:
+                One user:
+                  value:
+                    results:
+                      - gender: male
+                        name:
+                          title: mr
+                          first: brad
+                          last: gibson
+                        location:
+                          street: 9278 new road
+                          city: kilcoole
+                          state: waterford
+                          postcode: '93027'
+                          coordinates:
+                            latitude: '20.9267'
+                            longitude: '-7.9310'
+                          timezone:
+                            offset: '-3:30'
+                            description: Newfoundland
+                        email: brad.gibson@example.com
+                        login:
+                          uuid: 155e77ee-ba6d-486f-95ce-0e0c0fb4b919
+                          username: silverswan131
+                          password: firewall
+                          salt: TQA1Gz7x
+                          md5: dc523cb313b63dfe5be2140b0c05b3bc
+                          sha1: 7a4aa07d1bedcc6bcf4b7f8856643492c191540d
+                          sha256: 74364e96174afa7d17ee52dd2c9c7a4651fe1254f471a78bda0190135dcd3480
+                        dob:
+                          date: '1993-07-20T09:44:18.674Z'
+                          age: 26
+                        registered:
+                          date: '2002-05-21T10:59:49.966Z'
+                          age: 17
+                        phone: 011-962-7516
+                        cell: 081-454-0666
+                        id:
+                          name: PPS
+                          value: 0390511T
+                        picture:
+                          large: 'https://randomuser.me/api/portraits/men/75.jpg'
+                          medium: 'https://randomuser.me/api/portraits/med/men/75.jpg'
+                          thumbnail: 'https://randomuser.me/api/portraits/thumb/men/75.jpg'
+                        nat: IE
+                    info:
+                      seed: fea8be3e64777240
+                      results: 1
+                      page: 1
+                      version: '1.3'
+        '503':
+          description: Service Unavailable
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+              examples:
+                Server error:
+                  value:
+                    error: 'Uh oh, something has gone wrong. Please tweet us @randomapi about the issue. Thank you.'
+components:
+  schemas:
+    Charsets:
+      type: string
+      enum:
+        - special
+        - upper
+        - lower
+        - number
+    Fields:
+      type: string
+      enum:
+        - gender
+        - name
+        - location
+        - email
+        - login
+        - registered
+        - dob
+        - phone
+        - cell
+        - id
+        - picture
+        - nat
+  securitySchemes: { }
+  parameters: { }
