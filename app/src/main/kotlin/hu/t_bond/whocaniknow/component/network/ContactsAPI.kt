@@ -40,8 +40,8 @@ interface ContactsAPI {
         @Query("password") password: String? = null,
         @Query("page") page: Int? = null,
         @Query("results") limit: Int? = null,
-        @Query("inc") include: Iterable<@JvmSuppressWildcards FIELD>?? = null,
-        @Query("exc") exclude: Iterable<@JvmSuppressWildcards FIELD>?? = null,
+        @Query("inc") include: Iterable<@JvmSuppressWildcards FIELD>? = null,
+        @Query("exc") exclude: Iterable<@JvmSuppressWildcards FIELD>? = null,
         @Query("format") format: FORMAT? = null
     ): Call<ContactsResult>
 

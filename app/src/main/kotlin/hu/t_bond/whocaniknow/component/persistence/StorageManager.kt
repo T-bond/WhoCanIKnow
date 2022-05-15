@@ -6,7 +6,7 @@ interface StorageManager {
 
     fun hasDataForToday(): Boolean
 
-    fun getDataForToday(): ContactsResult
+    fun getDataForToday(): ContactsResult?
 
     fun saveDataForToday(contactsResult: ContactsResult)
 
