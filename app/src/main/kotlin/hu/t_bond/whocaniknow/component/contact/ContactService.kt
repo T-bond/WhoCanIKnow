@@ -6,7 +6,7 @@ interface ContactService {
 
     suspend fun getContacts(filter: String? = null): Map<Int, Contact>
 
-    suspend fun getContact(id: Int): Contact
+    suspend fun getContact(id: Int): Contact?
 
     fun callContact(contact: Contact)
 

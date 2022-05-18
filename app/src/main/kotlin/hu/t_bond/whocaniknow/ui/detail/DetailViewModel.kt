@@ -15,7 +15,7 @@ class DetailViewModel @Inject constructor(
 
     private val args = DetailFragmentArgs.fromSavedStateHandle(savedStateHandle)
 
-    val contact: LiveData<Contact> =
+    val contact: LiveData<Contact?> =
         liveData(context = viewModelScope.coroutineContext + Dispatchers.IO) {
             val contact = contactService.getContact(args.contactId)
 
@@ -23,7 +23,7 @@ class DetailViewModel @Inject constructor(
         }
 
     fun callContact() {
-        TODO("Not yet implemented.")
+        contact.value?.let { contactService.callContact(it) }
     }
 
 }

@@ -21,6 +21,10 @@ class StorageManagerImpl @Inject constructor(
     }
 
     override fun saveDataForToday(contactsResult: ContactsResult) {
+        if (contactsResult.contacts.isEmpty()) {
+            return
+        }
+
         val today = LocalDate.now()
 
         dailyContactsRepository.insertAll(

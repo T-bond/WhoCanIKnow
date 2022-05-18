@@ -8,4 +8,7 @@ data class ContactName(
     val firstName: String,
     @field:SerializedName("last")
     val lastName: String,
-)
+) {
+
+    fun fullName() = listOfNotNull(title, firstName, lastName).joinToString(" ")
+}
