@@ -5,4 +5,5 @@
     <string name="no_data_available">No data available…\nDo you have an internet connection?</string>
     <string name="loading">Loading contacts…</string>
     <string name="about">About</string>
+    <string name="about_description">Who Can I Know?\n\nCreated by: Tamás Nagy (T-bond)\nWebsite: https://t-bond.hu</string>
 </resources>
