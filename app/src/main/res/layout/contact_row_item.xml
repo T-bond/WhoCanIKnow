@@ -12,37 +12,47 @@
             type="hu.t_bond.whocaniknow.component.network.model.contact.Contact" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginTop="4dp"
+        style="?attr/materialCardViewFilledStyle"
+        android:clickable="true">
 
-        <ImageView
-            android:id="@+id/contact_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:minWidth="64dp"
-            android:minHeight="64dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            loadImageFromUri="@{contact.picture.large}"
-            tools:srcCompat="@mipmap/ic_launcher" />
+        <androidx.constraintlayout.widget.ConstraintLayout
 
-        <TextView
-            android:id="@+id/contact_name"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:text='@{contact.name.fullName()}'
-            app:layout_constraintBottom_toBottomOf="@+id/contact_image"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/contact_image"
-            app:layout_constraintTop_toTopOf="@+id/contact_image"
-            tools:text="John Doe" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/contact_image"
+                loadImageFromUri="@{contact.picture.large}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:minWidth="64dp"
+                android:minHeight="64dp"
+                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.circleImageView"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:srcCompat="@mipmap/ic_launcher" />
+
+            <TextView
+                android:id="@+id/contact_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:text='@{contact.name.fullName()}'
+                app:layout_constraintBottom_toBottomOf="@+id/contact_image"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/contact_image"
+                app:layout_constraintTop_toTopOf="@+id/contact_image"
+                tools:text="John Doe" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
 </layout>

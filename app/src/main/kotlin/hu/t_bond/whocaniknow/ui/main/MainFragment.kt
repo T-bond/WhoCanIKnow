@@ -7,6 +7,7 @@ import androidx.appcompat.widget.SearchView
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import hu.t_bond.whocaniknow.R
@@ -86,6 +87,13 @@ class MainFragment : Fragment() {
                     return true
                 }
             })
+        }
+
+        menu.findItem(R.id.app_bar_about).setOnMenuItemClickListener {
+            viewModel.filter = ""
+            findNavController().navigate(MainFragmentDirections.openAbout())
+
+            true
         }
 
         super.onCreateOptionsMenu(menu, menuInflater)
