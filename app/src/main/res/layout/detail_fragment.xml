@@ -1,13 +1,120 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.detail.DetailFragment">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
+    <data>
+
+        <variable
+            name="contact"
+            type="hu.t_bond.whocaniknow.component.network.model.contact.Contact" />
+
+        <variable
+            name="viewModel"
+            type="hu.t_bond.whocaniknow.ui.detail.DetailViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Detail" />
+        tools:context=".ui.detail.DetailFragment">
 
-</FrameLayout>
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/contact_image"
+            loadImageFromUri="@{contact.picture.large}"
+            android:layout_width="128dp"
+            android:layout_height="128dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:minWidth="64dp"
+            android:minHeight="64dp"
+            android:transitionName="contactImage"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.circleImageView" />
+
+        <TextView
+            android:id="@+id/contact_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="16dp"
+            android:gravity="center_horizontal"
+            android:text='@{contact.name.fullName()}'
+            android:textStyle="bold"
+            android:transitionName="contactName"
+            app:layout_constraintBottom_toBottomOf="@+id/contact_image"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/contact_image"
+            app:layout_constraintTop_toTopOf="@+id/contact_image"
+            tools:text="John Doe" />
+
+
+        <TextView
+            android:id="@+id/emailLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Email:"
+            app:layout_constraintEnd_toEndOf="@+id/contact_image"
+            app:layout_constraintTop_toBottomOf="@+id/contact_image" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:autoLink="email"
+            android:clickable="true"
+            android:text="@{contact.email}"
+            app:layout_constraintStart_toStartOf="@+id/contact_name"
+            app:layout_constraintTop_toTopOf="@+id/emailLabel"
+            tools:text="mail@example.nonexistent" />
+
+
+        <TextView
+            android:id="@+id/phoneNumberLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Phone number:"
+            app:layout_constraintEnd_toEndOf="@+id/emailLabel"
+            app:layout_constraintTop_toBottomOf="@+id/emailLabel" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{contact.cellphoneNumber}"
+            app:layout_constraintStart_toStartOf="@+id/contact_name"
+            app:layout_constraintTop_toTopOf="@+id/phoneNumberLabel"
+            tools:text="+46001234141" />
+
+        <TextView
+            android:id="@+id/birthdayLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Birthday:"
+            app:layout_constraintEnd_toEndOf="@+id/phoneNumberLabel"
+            app:layout_constraintTop_toBottomOf="@+id/phoneNumberLabel" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{contact.birthday.date.toLocaleString()}"
+            app:layout_constraintStart_toStartOf="@+id/contact_name"
+            app:layout_constraintTop_toTopOf="@+id/birthdayLabel"
+            tools:text="2000-01-01" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floatingActionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="32dp"
+            android:clickable="true"
+            android:onClick="@{() -> viewModel.callContact()}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/ic_baseline_call_24" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

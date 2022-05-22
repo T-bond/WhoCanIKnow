@@ -43,8 +43,9 @@ class ContactServiceImpl @Inject constructor(
     override fun callContact(contact: Contact) {
         startActivity(
             applicationContext,
-            Intent(Intent.ACTION_CALL).apply {
-                data = Uri.parse("tel:${contact.cellphoneNumber}")
+            Intent(Intent.ACTION_DIAL).apply {
+                data = Uri.parse("tel:${contact.cellphoneNumber.replace("[\\-()\\s]", "")}")
+                flags = flags.or(Intent.FLAG_ACTIVITY_NEW_TASK)
             }, Bundle.EMPTY
         )
     }

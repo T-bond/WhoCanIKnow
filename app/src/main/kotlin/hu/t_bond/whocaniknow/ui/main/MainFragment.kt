@@ -2,11 +2,14 @@ package hu.t_bond.whocaniknow.ui.main
 
 import android.net.ConnectivityManager
 import android.os.Bundle
+import android.transition.TransitionInflater
 import android.view.*
 import androidx.appcompat.widget.SearchView
 import androidx.core.content.ContextCompat.getSystemService
+import androidx.core.view.doOnPreDraw
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
@@ -19,7 +22,7 @@ class MainFragment : Fragment() {
 
     private lateinit var binding: MainFragmentBinding
     private val viewModel: MainViewModel by viewModels()
-    private val adapter = ContactListAdapter()
+    private val adapter = ContactListAdapter(onClick = this::onContactSelect)
     private var connectivityManager: ConnectivityManager? = null
 
     override fun onCreateView(
@@ -60,6 +63,24 @@ class MainFragment : Fragment() {
         connectivityManager?.registerDefaultNetworkCallback(viewModel.networkCallback)
 
         return binding.root
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        sharedElementEnterTransition =
+            TransitionInflater.from(context).inflateTransition(android.R.transition.move)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        postponeEnterTransition()
+
+        viewModel.getContacts().observe(viewLifecycleOwner) {
+            (view.parent as? ViewGroup)?.doOnPreDraw {
+                startPostponedEnterTransition()
+            }
+        }
+
     }
 
     override fun onDestroy() {
@@ -118,6 +139,15 @@ class MainFragment : Fragment() {
         binding.loadingIndication.visibility = View.GONE
         binding.noDataIndicator.visibility = View.GONE
         binding.loadingProgressIndicator.hide()
+    }
+
+    private fun onContactSelect(contactId: Int, imageView: View, nameView: View) {
+        val extras = FragmentNavigatorExtras(
+            nameView to "contactName",
+            imageView to "contactImage",
+        )
+
+        findNavController().navigate(MainFragmentDirections.openDetails(contactId), extras)
     }
 
 }
