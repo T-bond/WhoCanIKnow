@@ -18,3 +18,29 @@ docker run --rm \
     --additional-properties library=jvm-retrofit2 \
     -o /local/app/build/generated/source/retrofit2/
 ```
+
+# Video demos
+
+Playlist: [https://www.youtube.com/playlist?list=PLBgu02Z_5kSt0bdjnoTkiy8fo8njHihUj]()
+
+## Program demo
+
+[https://youtube.com/shorts/VVQu8bJRBDc?feature=share](https://youtube.com/shorts/VVQu8bJRBDc?feature=share)
+
+## Architectural presentation
+
+[https://youtu.be/RN1UbEWfSqw](https://youtu.be/RN1UbEWfSqw)
+
+# Tests
+
+## Coverage report
+
+![](doc/Test coverage.png)
+
+## Instrumented tests
+
+![](doc/Instrumented tests.png)
+
+## Unit tests
+
+![](doc/Unit tests.png)
