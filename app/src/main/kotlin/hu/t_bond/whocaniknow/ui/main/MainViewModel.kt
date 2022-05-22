@@ -10,6 +10,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import hu.t_bond.whocaniknow.component.contact.ContactService
 import hu.t_bond.whocaniknow.component.network.model.contact.Contact
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -19,6 +20,7 @@ class MainViewModel @Inject constructor(
     private val contactService: ContactService,
 ) : ViewModel() {
 
+    private var job: Job? = null
     private val _contacts: MutableLiveData<Map<Int, Contact>> = MutableLiveData(emptyMap())
 
     private val _hasDataAvailable: MutableLiveData<Boolean> = MutableLiveData(false)
@@ -49,7 +51,13 @@ class MainViewModel @Inject constructor(
     fun getDataAvailable(): LiveData<Boolean> = _hasDataAvailable
 
     fun refreshContactList() {
-        viewModelScope.launch(Dispatchers.IO) {
+        job?.run {
+            if (isActive) {
+                return
+            }
+        }
+
+        job = viewModelScope.launch(Dispatchers.IO) {
             _hasDataAvailable.postValue(true)
             val contacts = contactService.getContacts(filter)
             _contacts.postValue(contacts)
