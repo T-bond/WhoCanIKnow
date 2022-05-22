@@ -25,6 +25,7 @@ class MainFragment : Fragment() {
     private val adapter = ContactListAdapter(onClick = this::onContactSelect)
     private var connectivityManager: ConnectivityManager? = null
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -69,6 +70,11 @@ class MainFragment : Fragment() {
         super.onCreate(savedInstanceState)
         sharedElementEnterTransition =
             TransitionInflater.from(context).inflateTransition(android.R.transition.move)
+    }
+
+    override fun onResume() {
+        viewModel.refreshDailyTriggers()
+        super.onResume()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

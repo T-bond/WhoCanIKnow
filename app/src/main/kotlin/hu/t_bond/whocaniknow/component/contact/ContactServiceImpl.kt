@@ -26,7 +26,7 @@ class ContactServiceImpl @Inject constructor(
             contacts = storageManager.getDataForToday()
         }
 
-        if (contacts == null) {
+        if (contacts == null || contacts.contacts.isEmpty()) {
             contacts = contactProvider.getContacts(limit = 50)
             storageManager.saveDataForToday(contacts)
         }
