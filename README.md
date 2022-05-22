@@ -21,7 +21,7 @@ docker run --rm \
 
 # Video demos
 
-Playlist: [https://www.youtube.com/playlist?list=PLBgu02Z_5kSt0bdjnoTkiy8fo8njHihUj]()
+Playlist: [https://www.youtube.com/playlist?list=PLBgu02Z_5kSt0bdjnoTkiy8fo8njHihUj](https://www.youtube.com/playlist?list=PLBgu02Z_5kSt0bdjnoTkiy8fo8njHihUj)
 
 ## Program demo
 
