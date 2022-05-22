@@ -4,11 +4,13 @@ import hu.t_bond.whocaniknow.component.network.ContactProviderImpl
 import hu.t_bond.whocaniknow.component.network.ContactsAPI
 import hu.t_bond.whocaniknow.component.network.model.ContactsResult
 import hu.t_bond.whocaniknow.component.network.model.ResultInfo
+import hu.t_bond.whocaniknow.component.network.model.contact.Contact
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.mockito.Mockito.`when`
 import org.mockito.Mockito.mock
 import retrofit2.mock.Calls
+import java.net.UnknownHostException
 
 
 class ContactProviderUnitTest {
@@ -31,5 +33,19 @@ class ContactProviderUnitTest {
 
         // Assert
         assertEquals(expected, actual)
+    }
+
+    @Test
+    fun `On network failure empty result is returned`() {
+        // Arrange
+        `when`(contactsAPI.getUsers()).thenAnswer {
+            throw UnknownHostException()
+        }
+
+        // Act
+        val actual = contractProvider.getContacts()
+
+        // Assert
+        assertEquals(emptyList<Contact>(), actual.contacts)
     }
 }
