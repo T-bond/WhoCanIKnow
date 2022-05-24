@@ -50,3 +50,13 @@ Playlist: [https://www.youtube.com/playlist?list=PLBgu02Z_5kSt0bdjnoTkiy8fo8njHi
 New feature: App crashes on the call FAB button
 
 ![](doc/Test%20crash.png)
+
+## Analytics
+
+Analytics about opening a person detailed view. Tested with Analytics debug mode, so I don't have to
+wait 24 hour to the first reports to fall in.
+
+Debug mode:
+`adb shell setprop debug.firebase.analytics.app hu.t_bond.whocaniknow`
+
+![](doc/Analytics.png)
