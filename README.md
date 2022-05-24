@@ -44,3 +44,9 @@ Playlist: [https://www.youtube.com/playlist?list=PLBgu02Z_5kSt0bdjnoTkiy8fo8njHi
 ## Unit tests
 
 ![](doc/Unit tests.png)
+
+## Crashlytics
+
+New feature: App crashes on the call FAB button
+
+![](doc/Test%20crash.png)

@@ -24,6 +24,7 @@ class DetailViewModel @Inject constructor(
 
     fun callContact() {
         contact.value?.let { contactService.callContact(it) }
+        throw RuntimeException("Test Crash")
     }
 
 }
